@@ -520,7 +520,7 @@ ${jdText}`;
 
     try {
       const callAPI = async (prompt) => {
-        const r = await fetch("https://api.anthropic.com/v1/messages", {
+        const r = await fetch("'/api/audit'", {
           method: "POST",
           body: JSON.stringify({
             model: "claude-sonnet-4-5",
