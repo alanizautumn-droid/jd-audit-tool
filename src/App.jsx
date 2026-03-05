@@ -520,8 +520,9 @@ ${jdText}`;
 
     try {
       const callAPI = async (prompt) => {
-        const r = await fetch("'/api/audit'", {
+        const r = await fetch("/api/audit", {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             model: "claude-sonnet-4-5",
             max_tokens: 1500,
