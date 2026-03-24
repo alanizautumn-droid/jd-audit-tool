@@ -3458,9 +3458,7 @@ export default function App() {
               );
             })}
           </nav>
-          <div className="sidebar-footer">
-            <span className="proto-badge">⚠ Prototype · API client-side</span>
-          </div>
+
         </aside>
 
         <div className="main">
