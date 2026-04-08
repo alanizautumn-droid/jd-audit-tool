@@ -43,15 +43,9 @@ const callAPI = async (prompt, maxTokens = 4000) => {
   if (!_rl.check()) {
     throw new Error("Rate limit reached: max 100 requests per hour. Please wait before trying again.");
   }
-  const apiEndpoint = window.location.hostname === "localhost" && !window._useProxy
-    ? "https://api.anthropic.com/v1/messages"
-    : "/api/anthropic";
-  const directHeaders = apiEndpoint.includes("anthropic.com")
-    ? { "anthropic-dangerous-direct-browser-calls": "true" }
-    : {};
-  const r = await fetch(apiEndpoint, {
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "anthropic-version": "2023-06-01", ...directHeaders },
+    headers: { "Content-Type": "application/json", "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-calls": "true" },
     body: JSON.stringify({ model: "claude-sonnet-4-5", max_tokens: maxTokens, messages: [{ role: "user", content: prompt }] }),
   });
   if (!r.ok) { const t = await r.text(); throw new Error(`API ${r.status}: ${t}`); }
